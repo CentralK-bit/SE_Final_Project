@@ -21,6 +21,20 @@ namespace MyProject.WinForms
             };
 
             this.Controls.Add(lbl);
+            
+            Button btnProducts = new Button()
+            {
+                Text = "Manage Products",
+                Left = 20,
+                Top = 60
+            };
+
+            btnProducts.Click += (s, e) =>
+            {
+                new ProductForm().Show();
+            };
+
+            this.Controls.Add(btnProducts);
         }
     }
 }

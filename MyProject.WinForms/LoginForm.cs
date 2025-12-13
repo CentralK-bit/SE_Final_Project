@@ -80,6 +80,11 @@ namespace MyProject.WinForms
             this.Controls.Add(lblMessage);
         }
 
+        private void InitializeComponent()
+        {
+
+        }
+
         private void BtnLogin_Click(object sender, EventArgs e)
         {
             var service = new UserService();
