@@ -1,35 +1,23 @@
 ﻿using Microsoft.Data.SqlClient;
-using MyProject.DTO;
 
 namespace MyProject.DAL
 {
     public class UserRepository
     {
-        public UserDTO Login(string username, string password)
+        public virtual bool CheckLogin(string username, string password)
         {
-            using var conn = new SqlConnection(DbHelper.ConnectionString);
+            using var conn = DbHelper.GetConnection();
             conn.Open();
 
             var cmd = new SqlCommand(
-                "SELECT UserId, Username, Role FROM Users " +
-                "WHERE Username=@u AND PasswordHash=@p AND IsActive=1",
+                "SELECT COUNT(*) FROM Users WHERE Username=@u AND Password=@p",
                 conn);
 
             cmd.Parameters.AddWithValue("@u", username);
             cmd.Parameters.AddWithValue("@p", password);
 
-            using var reader = cmd.ExecuteReader();
-            if (reader.Read())
-            {
-                return new UserDTO
-                {
-                    UserId = reader.GetInt32(0),
-                    Username = reader.GetString(1),
-                    Password = password, // Set required property
-                    Role = reader.GetString(2)
-                };
-            }
-            return null;
+            int count = (int)cmd.ExecuteScalar();
+            return count > 0;
         }
     }
 }

@@ -1,12 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using Microsoft.Data.SqlClient;
+using System.Configuration;
 
 namespace MyProject.DAL
 {
     public static class DbHelper
     {
-        public static string ConnectionString =
-            "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=SE_Final_DB;Integrated Security=True\r\n";
+        public static SqlConnection GetConnection()
+        {
+            string connStr =
+                "Server=(localdb)\\MSSQLLocalDB;Database=SE_Final_DB;Trusted_Connection=True;";
+            return new SqlConnection(connStr);
+        }
     }
 }

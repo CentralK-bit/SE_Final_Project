@@ -23,8 +23,8 @@ namespace MyProject.DAL
             {
                 list.Add(new ProductDTO
                 {
-                    Id = (int)reader["Id"],
-                    Name = reader["Name"].ToString()!,
+                    ProductId = (int)reader["Id"],
+                    ProductName = reader["Name"].ToString()!,
                     Price = (decimal)reader["Price"],
                     Quantity = (int)reader["Quantity"]
                 });
@@ -42,7 +42,7 @@ namespace MyProject.DAL
                 "INSERT INTO Products (Name, Price, Quantity) VALUES (@n,@p,@q)",
                 conn);
 
-            cmd.Parameters.AddWithValue("@n", p.Name);
+            cmd.Parameters.AddWithValue("@n", p.ProductName);
             cmd.Parameters.AddWithValue("@p", p.Price);
             cmd.Parameters.AddWithValue("@q", p.Quantity);
 
@@ -58,8 +58,8 @@ namespace MyProject.DAL
                 "UPDATE Products SET Name=@n, Price=@p, Quantity=@q WHERE Id=@id",
                 conn);
 
-            cmd.Parameters.AddWithValue("@id", p.Id);
-            cmd.Parameters.AddWithValue("@n", p.Name);
+            cmd.Parameters.AddWithValue("@id", p.ProductId); // <-- Use ProductId, not Id
+            cmd.Parameters.AddWithValue("@n", p.ProductName);
             cmd.Parameters.AddWithValue("@p", p.Price);
             cmd.Parameters.AddWithValue("@q", p.Quantity);
 
@@ -74,7 +74,6 @@ namespace MyProject.DAL
             var cmd = new SqlCommand(
                 "DELETE FROM Products WHERE Id=@id",
                 conn);
-
             cmd.Parameters.AddWithValue("@id", id);
             cmd.ExecuteNonQuery();
         }

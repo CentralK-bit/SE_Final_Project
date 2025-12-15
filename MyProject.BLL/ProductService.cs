@@ -13,7 +13,7 @@ namespace MyProject.BLL
 
         public void AddProduct(ProductDTO p)
         {
-            if (string.IsNullOrWhiteSpace(p.Name))
+            if (string.IsNullOrWhiteSpace(p.ProductName))
                 return;
 
             _repo.Add(p);

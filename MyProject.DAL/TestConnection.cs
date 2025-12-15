@@ -8,7 +8,7 @@ namespace MyProject.DAL
         {
             try
             {
-                using var conn = new SqlConnection(DbHelper.ConnectionString);
+                using var conn = DbHelper.GetConnection();
                 conn.Open();
                 return true;
             }

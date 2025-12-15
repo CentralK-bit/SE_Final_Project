@@ -55,7 +55,7 @@ namespace MyProject.WinForms
         {
             service.AddProduct(new ProductDTO
             {
-                Name = txtName.Text,
+                ProductName = txtName.Text,
                 Price = decimal.Parse(txtPrice.Text),
                 Quantity = int.Parse(txtQty.Text)
             });
@@ -67,7 +67,7 @@ namespace MyProject.WinForms
             if (grid.CurrentRow == null) return;
 
             var p = (ProductDTO)grid.CurrentRow.DataBoundItem;
-            p.Name = txtName.Text;
+            p.ProductName = txtName.Text;
             p.Price = decimal.Parse(txtPrice.Text);
             p.Quantity = int.Parse(txtQty.Text);
 
@@ -80,7 +80,7 @@ namespace MyProject.WinForms
             if (grid.CurrentRow == null) return;
 
             var p = (ProductDTO)grid.CurrentRow.DataBoundItem;
-            service.DeleteProduct(p.Id);
+            service.DeleteProduct(p.ProductId);
             LoadData();
         }
 
@@ -89,7 +89,7 @@ namespace MyProject.WinForms
             if (grid.CurrentRow == null) return;
 
             var p = (ProductDTO)grid.CurrentRow.DataBoundItem;
-            txtName.Text = p.Name;
+            txtName.Text = p.ProductName;
             txtPrice.Text = p.Price.ToString();
             txtQty.Text = p.Quantity.ToString();
         }
